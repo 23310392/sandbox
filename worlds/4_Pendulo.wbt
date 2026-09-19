@@ -1,0 +1,114 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/OsbWood.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Copper.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Plastic.proto"
+
+WorldInfo {
+  basicTimeStep 4
+}
+Viewpoint {
+  orientation -0.06603914505202708 -0.24184283594220657 0.9680655318852274 5.421088044264556
+  position -0.2824667986465552 0.6822694248797628 0.5502422924390205
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  translation 0 0 -0.38
+  floorSize 7 7
+}
+Robot {
+  translation 0 0.34 0.39
+  rotation 0 1 0 0
+  children [
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.0178 0
+        dampingConstant 0.0001
+      }
+      device [
+        RotationalMotor {
+          name "motor"
+        }
+        PositionSensor {
+          name "encoder"
+        }
+      ]
+      endPoint Solid {
+        rotation 0 0.9999999999999999 0 0.005000000000007672
+        children [
+          Pose {
+            translation 0 0.0178 0.07
+            children [
+              Solid {
+                translation 0 0 0.07
+                children [
+                  Shape {
+                    appearance Plastic {
+                    }
+                    geometry Sphere {
+                      radius 0.01
+                    }
+                  }
+                ]
+                boundingObject Sphere {
+                  radius 0.01
+                }
+                physics Physics {
+                  density 1240
+                }
+              }
+              Shape {
+                appearance Plastic {
+                }
+                geometry Cylinder {
+                  height 0.14
+                  radius 0.0025
+                }
+              }
+            ]
+          }
+        ]
+        boundingObject Pose {
+          translation 0 0.0178 0.07
+          children [
+            Cylinder {
+              height 0.14
+              radius 0.0025
+            }
+          ]
+        }
+        physics Physics {
+          density 1240
+        }
+      }
+    }
+    Shape {
+      appearance Copper {
+      }
+      geometry DEF TUBITO Box {
+        size 0.01 0.0305 0.0211
+      }
+    }
+  ]
+  controller "controlador_pendulo"
+}
+Solid {
+  translation -0.0099996 -9.99999e-08 0
+  children [
+    Shape {
+      appearance OsbWood {
+      }
+      geometry DEF GEOMETRIA_mesa Box {
+        size 0.5 0.7 0.76
+      }
+    }
+  ]
+  boundingObject USE GEOMETRIA_mesa
+}
